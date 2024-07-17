@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt_br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show do Milhão</title>
+    <link rel="stylesheet" href="index.css">
+    <style>
+        /* Estilo para o controle de áudio */
+        audio {
+            position: fixed;
+            top: 10px; /* Distância do topo */
+            left: 10px; /* Distância da esquerda */
+            z-index: 1000; /* Garante que fique sobre outros elementos */
+        }
+        /* Estilo para personalizar a cor dos controles */
+        audio::-webkit-media-controls-panel {
+            background-color: #1407381a; /* Cor de fundo */
+            color: #333; /* Cor do texto e ícones */
+        }
+        audio::-webkit-media-controls-play-button,
+        audio::-webkit-media-controls-pause-button {
+            color: #333; /* Cor dos botões de play/pause */
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div id="home" class="flex-center flex-column">
+            <img src="logo.png" alt="Show do Milhão">
+            <div class="botoes">
+                <a href="game.html"><button class="botao">Jogar</button></a>
+                <a href="regras.html"><button class="botao">Regras</button></a>
+                <audio controls autoplay>
+                    <source src="sounds_abertura.mp3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

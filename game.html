@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt_br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show do Milhão</title>
+    <link rel="stylesheet" href="game.css">
+    <style>
+        /* Estilo para o controle de áudio */
+        audio {
+            position: fixed;
+            top: 10px; /* Distância do topo */
+            left: 10px; /* Distância da esquerda */
+            z-index: 1000; /* Garante que fique sobre outros elementos */
+        }
+        /* Estilo para personalizar a cor dos controles */
+        audio::-webkit-media-controls-panel {
+            background-color: #1407381a; /* Cor de fundo */
+            color: #333; /* Cor do texto e ícones */
+        }
+        audio::-webkit-media-controls-play-button,
+        audio::-webkit-media-controls-pause-button {
+            color: #333; /* Cor dos botões de play/pause */
+        }
+        /* Estilo para animação */
+        @keyframes aparecer {
+            0% {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Aplicando a animação à pergunta */
+        #pergunta {
+            animation: aparecer 0.5s ease-in-out;
+            text-align: center; /* Centraliza o texto da pergunta */
+            font-size: 15px; /* Tamanho da fonte da pergunta */
+            margin-bottom: 20px; /* Espaçamento inferior */
+        }
+
+        /* Estilo para o container principal */
+        .container {
+            background: linear-gradient(90deg, rgba(0, 0, 0, 0.9) 1.19%, #0000ec 250%);
+            color: blanchedalmond;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        /* Estilo para a seção de informações */
+        .info {
+            text-align: center;
+            font-size: 18px;
+            max-width: 600px; /* Largura máxima do conteúdo */
+            margin-bottom: 20px; /* Espaçamento inferior */
+        }
+
+        /* Estilo para os botões de resposta */
+        .btn {
+            width: 100%; /* Ocupa toda a largura disponível */
+            margin: 8px 0; /* Espaçamento entre os botões */
+            font-size: 18px; /* Tamanho da fonte dos botões */
+            padding: 12px; /* Espaçamento interno dos botões */
+            border-radius: 8px; /* Bordas arredondadas */
+            cursor: pointer;
+            background: linear-gradient(
+        50deg,
+        rgb(151, 153, 151) 0.2%,
+        #0000ec 200%
+    ); /* Cor de fundo dos botões */
+            color: blanchedalmond; /* Cor do texto dos botões */
+            border: none;
+            transition: background-color 0.3s ease; /* Transição suave de cor de fundo */
+        }
+
+        .btn:hover {
+            background-color: #ffffff; /* Cor de fundo ao passar o mouse */
+            color: black;
+        }
+
+        /* Estilo para os botões de controle */
+        .controle {
+            margin-top: 20px; /* Espaçamento superior */
+            display: flex;
+            justify-content: space-around; /* Distribui os botões horizontalmente */
+            max-width: 600px; /* Largura máxima */
+        }
+
+        .decisionButton {
+            border-radius: 500px;
+            height: 50px;
+            width: 120px;
+            font-weight: bold;
+            font-size: 20px;
+            cursor: pointer;
+            background: transparent;
+            border: 2px solid blanchedalmond;
+            color: blanchedalmond;
+            transition: all 0.3s ease;
+        }
+
+        .decisionButton:hover {
+            background: rgba(39, 38, 54, 0.055);
+            border: 2px solid white;
+            border-radius: 500px;
+            color: white;
+        }
+
+        .decisionButton:focus {
+            outline: none;
+        }
+        
+        @media (max-width: 768px) {
+            .btn, .decisionButton {
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 5px; /* Espaçamento interno menor */
+            }
+            .info {
+                font-size: 16px;
+            }
+            .btn, .decisionButton {
+                font-size: 14px;
+            }
+        } 
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="info">
+            <p id="pontos">Você possui R$0,00</p>
+            <p id="acerto">Pergunta valendo R$1000,00</p>
+            <p id="erro">Se errar ganha R$0,00</p>
+            <span id="tempo">Tempo: 90s</span>
+        </div>
+
+        <div class="quest">
+            <div id="perguntas">
+                <h2 id="pergunta">Qual é a capital do Brasil?</h2>
+            </div>
+            <div class="respostas">
+                <button class="btn" id="btn1" onclick="verificaResposta(1)">Resposta 1</button>
+                <button class="btn" id="btn2" onclick="verificaResposta(2)">Resposta 2</button>
+                <button class="btn" id="btn3" onclick="verificaResposta(3)">Resposta 3</button>
+                <button class="btn" id="btn4" onclick="verificaResposta(4)">Resposta 4</button>
+                <audio controls autoplay>
+                    <source src="sounds_suspense.mp3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
+            
+            <div class="controle">
+                <button class="decisionButton" onclick="gameOverWin()">Parar</button>
+                <button class="decisionButton" id="pulou" onclick="pular()">Pular 0/3</button>
+            </div>
+        </div>
+    </div>
+    <script src="game.js"></script>
+</body>
+</html>
